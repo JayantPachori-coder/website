@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('background.jpeg');
+            background-size: 1566px 744px;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: "";
+            background-image: url('background.jpeg');
+            background-size: cover;
+            filter: blur(1.5px);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .section {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 400px;
+        }
+
+        h1 {
+            font-family: 'Young Serif';
+            font-size: 33px;
+            text-shadow: 2px 2px #0000007b;
+        }
+
+        h2 {
+            font-family: 'Montserrat';
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+            <h1>Paper Detection Count</h1>
+            <p id="paperCount">Click the button to get data</p>
+            <button onclick="getPaperCount()">Count Papers</button>
+        </div>
+        <div class="section">
+            <h1>Ultrasonic Distance Measure</h1>
+            <p id="distanceMeasure">Click the button to get data</p>
+            <button onclick="getDistanceMeasure()">Measure Distance</button>
+        </div>
+    </div>
+
+    <script>
+        function getPaperCount() {
+            fetch('http://api.thingspeak.com/channels/YOUR_CHANNEL_ID/fields/1.json?api_key=2EH4UOJW5SXYR8FP&results=1')
+                .then(response => response.json())
+                .then(data => {
+                    const paperCount = data.feeds[0].field1;
+                    document.getElementById('paperCount').innerText = `Paper Count: ${paperCount}`;
+                })
+                .catch(error => {
+                    document.getElementById('paperCount').innerText = 'Error fetching data';
+                    console.error('Error:', error);
+                });
+        }
+
+        function getDistanceMeasure() {
+            fetch('http://api.thingspeak.com/channels/YOUR_CHANNEL_ID/fields/2.json?api_key=2EH4UOJW5SXYR8FP&results=1')
+                .then(response => response.json())
+                .then(data => {
+                    const distanceMeasure = data.feeds[0].field2;
+                    document.getElementById('distanceMeasure').innerText = `Distance Measure: ${distanceMeasure}`;
+                })
+                .catch(error => {
+                    document.getElementById('distanceMeasure').innerText = 'Error fetching data';
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+</html>
