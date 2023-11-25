@@ -126,7 +126,9 @@
         statusContentElement.innerHTML = "Distance Status: " + content;
         
         // Call the function to update the content based on the distance value
-         updateDistanceContent();
+        window.onload = function() {
+            updateDistanceContent();
+        };
     </script>
 </body>
 
