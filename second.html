@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,6 +74,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="section">
@@ -88,31 +90,27 @@
     </div>
 
     <script>
-        function getPaperCount() {
-            fetch('<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2322657/widgets/756226"></iframe>')
+        function fetchData(url, callback) {
+            fetch(url)
                 .then(response => response.json())
-                .then(data => {
-                    const paperCount = data.feeds[0].field1;
-                    document.getElementById('paperCount').innerText = `Paper Count: ${paperCount}`;
-                })
-                .catch(error => {
-                    document.getElementById('paperCount').innerText = 'Error fetching data';
-                    console.error('Error:', error);
-                });
+                .then(data => callback(data))
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        function getPaperCount() {
+            fetchData('https://api.thingspeak.com/channels/2322657/feeds.json?results=1', data => {
+                const paperCount = data.feeds[0].field1;
+                document.getElementById('paperCount').innerText = `Paper Count: ${paperCount}`;
+            });
         }
 
         function getDistanceMeasure() {
-            fetch('<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2322657/widgets/756227"></iframe>')
-                .then(response => response.json())
-                .then(data => {
-                    const distanceMeasure = data.feeds[0].field2;
-                    document.getElementById('distanceMeasure').innerText = `Distance Measure: ${distanceMeasure}`;
-                })
-                .catch(error => {
-                    document.getElementById('distanceMeasure').innerText = 'Error fetching data';
-                    console.error('Error:', error);
-                });
+            fetchData('https://api.thingspeak.com/channels/2322657/feeds.json?results=1', data => {
+                const distanceMeasure = data.feeds[0].field2;
+                document.getElementById('distanceMeasure').innerText = `Distance Measure: ${distanceMeasure}`;
+            });
         }
     </script>
 </body>
+
 </html>
