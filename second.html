@@ -92,7 +92,7 @@
             fetch('<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2322657/widgets/756226"></iframe>')
                 .then(response => response.json())
                 .then(data => {
-                    const paperCount = data.feeds[0].field1;
+                    const paperCount = data.feeds[0].Field 1 Numeric Display;
                     document.getElementById('paperCount').innerText = `Paper Count: ${paperCount}`;
                 })
                 .catch(error => {
