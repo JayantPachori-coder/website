@@ -90,6 +90,8 @@
             <p id="distanceMeasure"><iframe width="350" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2322657/widgets/756227"></iframe></p>
             <span id="displayValue" style="outline: rgb(112, 128, 144) solid 0.5px;">4.0</span>
             <p id="statusContent"></p>
+
+            <button onclick="redirectToThirdPage()">Next</button>
         </div>
     </div>
 
@@ -129,6 +131,9 @@
         window.onload = function() {
             updateDistanceContent();
         };
+
+            function redirectToThirdPage() {
+            window.location.href = "third.html";
     </script>
 </body>
 
