@@ -89,10 +89,20 @@
             <h1>Ultrasonic Distance Measure</h1>
             <p id="distanceMeasure"><iframe width="350" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2322657/widgets/756227"></iframe></p>
             <span id="displayValue" style="outline: rgb(112, 128, 144) solid 0.5px;">4.0</span>
+            <p id="statusContent"></p>
         </div>
     </div>
 
     <script>
+
+        function updateDistanceContent() {
+            var distanceMeasureElement = document.getElementById("displayValue");
+            var statusContentElement = document.getElementById("statusContent");
+            var content = distanceMeasureElement.innerText.trim(); 
+            
+
+            var distanceNumber = parseFloat(content);
+            
         // Function to update the content based on distance values
         function updateDistanceContent(distance) {
             var distanceMeasureElement = document.getElementById("distanceMeasure");
@@ -112,9 +122,11 @@
         // Assuming you have a way to get the distance value from your sensor/Thingspeak
         // Replace the following line with your actual code to get the distance value
         var distanceValue = document.getElementById("displayValue").innerText;
+
+        statusContentElement.innerHTML = "Distance Status: " + content;
         
         // Call the function to update the content based on the distance value
-        updateDistanceContent(distanceValue);
+         updateDistanceContent();
     </script>
 </body>
 
