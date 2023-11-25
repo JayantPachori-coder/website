@@ -89,7 +89,7 @@
 
     <script>
         function getPaperCount() {
-            fetch('http://api.thingspeak.com/channels/YOUR_CHANNEL_ID/fields/1.json?api_key=2EH4UOJW5SXYR8FP&results=1')
+            fetch('<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2322657/widgets/756226"></iframe>')
                 .then(response => response.json())
                 .then(data => {
                     const paperCount = data.feeds[0].field1;
@@ -102,7 +102,7 @@
         }
 
         function getDistanceMeasure() {
-            fetch('http://api.thingspeak.com/channels/YOUR_CHANNEL_ID/fields/2.json?api_key=2EH4UOJW5SXYR8FP&results=1')
+            fetch('<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2322657/widgets/756227"></iframe>')
                 .then(response => response.json())
                 .then(data => {
                     const distanceMeasure = data.feeds[0].field2;
